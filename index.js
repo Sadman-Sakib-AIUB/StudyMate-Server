@@ -54,6 +54,16 @@ async function run() {
       res.send(user);
     });
 
+    app.patch("/users/:email", async (req, res) => {
+      const email = req.params.email;
+      const updatedData = req.body;
+      const result = await usersCollection.updateOne(
+        { email },
+        { $set: updatedData }
+      );
+      res.send(result);
+    });
+
     //------------------------------------ Partners APIs ---------------------------
 
     app.post("/partners", async (req, res) => {
